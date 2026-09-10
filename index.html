@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社玉久｜玉、磨かざれば光なし。</title>
+<meta name="description" content="株式会社玉久 公式サイト。福岡・薬院を拠点に、和の習い事、飲食店、美容の三つの事業を通じて「磨く」ことの豊かさを届けます。">
+
+<!-- ============================================================
+  制作メモ（納品時にご確認ください）
+  ・本ファイルは HTML / CSS / JavaScript を1ファイルに内包したシングルファイル構成です。
+  ・Cloudflare Pages への配置は「index.html を含むフォルダをドラッグ&ドロップ」で完了します（デプロイ作業はご担当ください）。
+  ・「要確認」バッジが付いた箇所は、法的表現・未確定情報・代表者ご本人の言葉での確認が必要な部分です。
+  ・使用画像はすべて Unsplash のフリー素材（暫定）です。開業前に自社撮影の写真へ差し替えることを推奨します。
+============================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#15130f;
+    --ink-2:#201c15;
+    --ink-text:#2b2620;
+    --paper:#f3eee3;
+    --paper-2:#eae1cd;
+    --gold:#b8863c;
+    --gold-light:#d9b884;
+    --gold-deep:#8a6428;
+    --indigo:#34465c;
+    --indigo-soft:#5b7188;
+    --matcha:#5c6b47;
+    --matcha-soft:#8a9770;
+    --urushi:#8c4a3b;
+    --sakura:#b47f79;
+    --sakura-soft:#d3aba5;
+    --line:rgba(21,19,15,0.12);
+    --line-on-ink:rgba(243,238,227,0.16);
+    --shadow:0 24px 60px rgba(21,19,15,0.16);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-text);
+    font-family:"Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+    font-weight:400;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:"Shippori Mincho B1", serif;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
+
+  p{margin:0 0 1.2em;}
+  p:last-child{margin-bottom:0;}
+
+  a{color:inherit;}
+
+  .mono{
+    font-family:"IBM Plex Mono", monospace;
+    letter-spacing:.04em;
+  }
+
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 clamp(20px,5vw,64px);
+  }
+
+  /* ---------- skip link ---------- */
+  .skip-link{
+    position:absolute; left:-999px; top:0;
+    background:var(--gold); color:var(--ink); padding:12px 20px;
+    z-index:999; font-family:"Zen Kaku Gothic New",sans-serif; font-size:14px;
+    border-radius:0 0 6px 0;
+  }
+  .skip-link:focus{left:0;}
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  /* ================= Kintsugi scroll rail (signature element) ================= */
+  .kintsugi-rail{
+    position:fixed;
+    left:0; top:0;
+    height:100vh;
+    width:34px;
+    z-index:60;
+    pointer-events:none;
+    display:flex;
+    align-items:center;
+  }
+  .kintsugi-rail svg{
+    height:100vh;
+    width:34px;
+    overflow:visible;
+  }
+  .kintsugi-rail .rail-track{
+    stroke:rgba(21,19,15,0.14);
+    stroke-width:2;
+    fill:none;
+  }
+  .kintsugi-rail .rail-gold{
+    stroke:url(#railGoldGrad);
+    stroke-width:2.6;
+    fill:none;
+    stroke-dasharray:2600;
+    stroke-dashoffset:2600;
+    filter:drop-shadow(0 0 3px rgba(184,134,60,0.5));
+  }
+  .rail-node{
+    fill:var(--paper);
+    stroke:rgba(21,19,15,0.3);
+    stroke-width:1.4;
+    transition:fill .5s var(--ease), stroke .5s var(--ease);
+  }
+  .rail-node.lit{
+    fill:var(--gold);
+    stroke:var(--gold-deep);
+  }
+  @media (max-width:900px){
+    .kintsugi-rail{display:none;}
+  }
+
+  /* ================= header ================= */
+  .site-header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:80;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px clamp(20px,5vw,64px);
+    mix-blend-mode:normal;
+    pointer-events:none;
+  }
+  .site-header .brand-mark, .site-header .brand-loc{
+    pointer-events:auto;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.08em;
+    color:var(--paper);
+    transition:color .5s var(--ease);
+  }
+  .site-header.on-light .brand-mark,
+  .site-header.on-light .brand-loc{
+    color:var(--ink);
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+  }
+  .hero canvas{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    opacity:.85;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    width:100%;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:clamp(24px,6vw,80px);
+    padding:0 clamp(20px,6vw,80px);
+  }
+  .hero-vertical{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-family:"Shippori Mincho B1", serif;
+    font-size:clamp(30px,5.4vw,58px);
+    font-weight:600;
+    letter-spacing:.14em;
+    line-height:1.5;
+    color:var(--paper);
+  }
+  .hero-vertical .furigana-line{
+    display:block;
+    font-size:0.32em;
+    font-family:"IBM Plex Mono", monospace;
+    letter-spacing:.3em;
+    color:var(--gold-light);
+    margin-bottom:1.2em;
+  }
+  .hero-side{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    max-width:290px;
+    padding-bottom:6px;
+  }
+  .hero-side .kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    color:var(--gold-light);
+  }
+  .hero-side p{
+    font-size:15px;
+    color:rgba(243,238,227,0.82);
+  }
+  .hero-scroll{
+    position:absolute;
+    left:clamp(20px,6vw,80px);
+    bottom:36px;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    color:rgba(243,238,227,0.6);
+  }
+  .hero-scroll .line{
+    width:36px; height:1px; background:rgba(243,238,227,0.4);
+    position:relative; overflow:hidden;
+  }
+  .hero-scroll .line::after{
+    content:"";
+    position:absolute; left:-100%; top:0; bottom:0; width:100%;
+    background:var(--gold-light);
+    animation:scrollLine 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollLine{
+    0%{left:-100%;} 50%{left:0;} 100%{left:100%;}
+  }
+
+  /* ================= section base ================= */
+  section{
+    position:relative;
+    padding:clamp(90px,12vw,160px) 0;
+  }
+  .section-head{
+    max-width:640px;
+    margin-bottom:clamp(48px,6vw,84px);
+  }
+  .section-head .kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.16em;
+    color:var(--gold-deep);
+    display:block;
+    margin-bottom:18px;
+  }
+  .section-head h2{
+    font-size:clamp(28px,4vw,44px);
+    line-height:1.5;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ================= PHILOSOPHY ================= */
+  .philosophy{
+    background:var(--paper);
+  }
+  .philosophy .grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:clamp(40px,6vw,90px);
+    align-items:center;
+  }
+  .proverb{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:clamp(24px,2.6vw,34px);
+    line-height:1.9;
+    color:var(--ink);
+    margin-bottom:34px;
+    position:relative;
+    padding-left:26px;
+    border-left:2px solid var(--gold);
+  }
+  .philosophy-body p{
+    font-size:15.5px;
+    color:var(--ink-text);
+    max-width:52ch;
+  }
+  .kintsugi-figure{
+    position:relative;
+  }
+  .kintsugi-figure svg{width:100%; height:auto;}
+  .kintsugi-figure .crack{
+    fill:none;
+    stroke:url(#figGoldGrad);
+    stroke-width:2.2;
+    stroke-linecap:round;
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    transition:stroke-dashoffset 1.6s var(--ease);
+  }
+  .kintsugi-figure.in .crack{stroke-dashoffset:0;}
+  .kintsugi-figure .crack.c2{transition-delay:.25s;}
+  .kintsugi-figure .crack.c3{transition-delay:.5s;}
+  .kintsugi-figure .crack.c4{transition-delay:.7s;}
+  .kintsugi-figure .vessel{
+    fill:var(--paper-2);
+    stroke:var(--ink);
+    stroke-opacity:.5;
+    stroke-width:1.4;
+  }
+  .kintsugi-caption{
+    margin-top:18px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11.5px;
+    letter-spacing:.06em;
+    color:var(--ink-text);
+    opacity:.65;
+    text-align:center;
+  }
+
+  @media (max-width:860px){
+    .philosophy .grid{grid-template-columns:1fr;}
+    .kintsugi-figure{order:-1; max-width:280px; margin:0 auto 20px;}
+  }
+
+  /* ================= SERVICES ================= */
+  .services{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .services .section-head h2{color:var(--paper);}
+  .services .section-head p{color:rgba(243,238,227,.75);}
+  .service-block{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:clamp(30px,5vw,70px);
+    align-items:center;
+    padding:56px 0;
+    border-top:1px solid var(--line-on-ink);
+  }
+  .service-block:last-child{padding-bottom:0;}
+  .service-block:nth-child(even) .service-media{order:2;}
+  .service-media{
+    position:relative;
+    border-radius:2px;
+    overflow:hidden;
+    aspect-ratio:4/3;
+    background:var(--ink-2);
+  }
+  .service-media img{
+    width:100%; height:100%; object-fit:cover;
+    filter:saturate(.92) contrast(1.02);
+  }
+  .service-media .accent-corner{
+    position:absolute; left:0; top:0;
+    width:46px; height:46px;
+    border-left:2px solid var(--accent, var(--gold));
+    border-top:2px solid var(--accent, var(--gold));
+  }
+  .service-copy .num-label{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11.5px;
+    letter-spacing:.14em;
+    color:var(--accent, var(--gold-light));
+    display:block;
+    margin-bottom:14px;
+  }
+  .service-copy .sub-brand{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:14px;
+    color:rgba(243,238,227,.65);
+    display:block;
+    margin-bottom:10px;
+    letter-spacing:.05em;
+  }
+  .service-copy h3{
+    color:var(--paper);
+    font-size:clamp(24px,3vw,32px);
+    margin-bottom:18px;
+    line-height:1.6;
+  }
+  .service-copy p{
+    color:rgba(243,238,227,.78);
+    font-size:15px;
+    max-width:48ch;
+  }
+  .service-copy .scope{
+    margin-top:20px;
+    font-size:13px;
+    color:rgba(243,238,227,.55);
+    border-left:2px solid var(--accent, var(--gold));
+    padding-left:14px;
+  }
+
+  /* ================= PROCESS ================= */
+  .process{background:var(--paper-2);}
+  .stage-line{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:2px;
+    margin-top:20px;
+  }
+  .stage-line::before{
+    content:"";
+    position:absolute;
+    left:0; right:0; top:22px;
+    height:1px;
+    background:var(--line);
+  }
+  .stage{
+    position:relative;
+    padding-top:56px;
+  }
+  .stage .dot{
+    position:absolute; top:12px; left:0;
+    width:22px; height:22px;
+    border-radius:50%;
+    background:var(--paper-2);
+    border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stage .dot::after{
+    content:"";
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    opacity:0;
+    transition:opacity .5s var(--ease);
+  }
+  .stage.in .dot::after{opacity:1;}
+  .stage .stage-jp{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:21px;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .stage .stage-en{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    color:var(--gold-deep);
+    display:block;
+    margin-bottom:14px;
+  }
+  .stage p{font-size:13.8px; color:var(--ink-text); max-width:30ch;}
+  @media (max-width:760px){
+    .stage-line{grid-template-columns:1fr; gap:36px;}
+    .stage-line::before{display:none;}
+  }
+
+  /* ================= MESSAGE ================= */
+  .message{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .message .wrap{
+    display:flex;
+    gap:clamp(30px,6vw,90px);
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+  .message-vertical{
+    writing-mode:horizontal-tb;
+    font-family:"Shippori Mincho B1", serif;
+    font-size:clamp(16px,1.9vw,19px);
+    line-height:2.15;
+    letter-spacing:.06em;
+    color:rgba(243,238,227,.92);
+    flex:1 1 420px;
+    max-width:62ch;
+    padding-bottom:6px;
+  }
+  .message-meta{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    min-width:220px;
+    padding-top:8px;
+  }
+  .message-meta .role{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11.5px;
+    letter-spacing:.1em;
+    color:var(--gold-light);
+  }
+  .message-meta .name{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:22px;
+    color:var(--paper);
+  }
+  .message-meta .note{
+    font-size:13px;
+    color:rgba(243,238,227,.6);
+    max-width:26ch;
+  }
+
+  @media (max-width:760px){
+    .message-vertical{line-height:2;}
+  }
+
+  /* ================= PROFILE ================= */
+  .profile{background:var(--paper);}
+  .profile-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(30px,5vw,80px);
+  }
+  .profile-table{
+    width:100%;
+    border-collapse:collapse;
+  }
+  .profile-table tr{border-top:1px solid var(--line);}
+  .profile-table tr:last-child{border-bottom:1px solid var(--line);}
+  .profile-table th, .profile-table td{
+    text-align:left;
+    padding:18px 10px;
+    vertical-align:top;
+    font-size:14.5px;
+  }
+  .profile-table th{
+    font-family:"IBM Plex Mono", monospace;
+    font-weight:500;
+    font-size:12px;
+    letter-spacing:.08em;
+    color:var(--gold-deep);
+    width:34%;
+    white-space:nowrap;
+  }
+  .profile-table td{color:var(--ink-text);}
+  .profile-table ol{margin:0; padding-left:18px;}
+  .profile-table li{margin-bottom:8px;}
+  .profile-table li:last-child{margin-bottom:0;}
+
+  .profile-note{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    padding:26px 28px;
+    font-size:13.5px;
+    color:var(--ink-text);
+    line-height:1.85;
+    height:fit-content;
+  }
+  .profile-note h4{
+    font-size:14px;
+    margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .profile-note ul{margin:0; padding-left:18px;}
+  .profile-note li{margin-bottom:8px;}
+
+  @media (max-width:860px){
+    .profile-grid{grid-template-columns:1fr;}
+  }
+
+  /* ================= FOOTER ================= */
+  footer{
+    background:var(--ink);
+    color:rgba(243,238,227,.7);
+    padding:60px 0 40px;
+  }
+  footer .foot-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+    padding-bottom:34px;
+    border-bottom:1px solid var(--line-on-ink);
+    margin-bottom:26px;
+  }
+  footer .foot-brand{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:22px;
+    color:var(--paper);
+    letter-spacing:.06em;
+  }
+  footer .foot-addr{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    color:rgba(243,238,227,.55);
+    line-height:1.8;
+  }
+  footer .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:11.5px;
+    font-family:"IBM Plex Mono", monospace;
+    color:rgba(243,238,227,.4);
+  }
+
+  .nw{white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<!-- ============================================================
+  法務・確認事項（HTMLコメント）
+  ・美容事業：施術・効果に関する表現は薬機法/医師法に抵触しない範囲に留めています（医療的な「治療」「完治」等の表現は使用していません）。実際の施術内容に応じて表現の再確認が必要です。
+  ・飲食店事業：酒類を提供される場合、酒類販売業免許・食品衛生責任者の資格等が必要です（本サイトでは具体的な許可番号等は記載していません）。
+  ・和の習い事事業：講師資格・流派等を明記する場合は、正式名称のご確認をお願いします。
+  ・各事業のサブブランド名（香雲庵／珠のま／玉肌院）は、コンセプトに基づくご提案です。既に正式名称がある場合は差し替えてください。
+  ・薬院の地名由来（施薬院・薬草園の記述）は伝承としてご紹介しています。事実関係の最終確認をお願いします。
+  ・代表者メッセージは草案です。中山様ご本人の言葉での確定をお願いします。
+  ・会社概要の設立年・資本金は情報提供がなかったため「要確認」としています。
+  ・各確認事項は本文中に表示せず、該当箇所付近のHTMLコメントにのみ記載しています。
+============================================================= -->
+
+<header class="site-header" id="siteHeader">
+  <span class="brand-mark mono">株式会社玉久</span>
+  <span class="brand-loc mono">FUKUOKA / YAKUIN</span>
+</header>
+
+<!-- 金継ぎの一筋 ー スクロール連動の署名的インタラクション -->
+<div class="kintsugi-rail" aria-hidden="true">
+  <svg viewBox="0 0 34 1000" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="railGoldGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e7c281"/>
+        <stop offset="50%" stop-color="#b8863c"/>
+        <stop offset="100%" stop-color="#8a6428"/>
+      </linearGradient>
+    </defs>
+    <path class="rail-track" d="M17,0 L17,1000" />
+    <path class="rail-gold" id="railGold" d="M17,0 L17,1000" />
+    <circle class="rail-node" data-idx="0" cx="17" cy="40" r="4.5"/>
+    <circle class="rail-node" data-idx="1" cx="17" cy="220" r="4.5"/>
+    <circle class="rail-node" data-idx="2" cx="17" cy="440" r="4.5"/>
+    <circle class="rail-node" data-idx="3" cx="17" cy="640" r="4.5"/>
+    <circle class="rail-node" data-idx="4" cx="17" cy="800" r="4.5"/>
+    <circle class="rail-node" data-idx="5" cx="17" cy="940" r="4.5"/>
+  </svg>
+</div>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero" data-section>
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-side">
+        <span class="kicker">TAMAHISA CO., LTD.</span>
+        <p>和の習い事、飲食店、美容。三つの事業を通じて、日常に光を灯す。福岡・薬院からはじまる、磨くことの物語。</p>
+      </div>
+      <h1 class="hero-vertical">
+        <span class="furigana-line">たまきゅう</span>
+        株式会社玉久
+      </h1>
+    </div>
+    <div class="hero-scroll"><span class="line"></span>SCROLL</div>
+  </section>
+
+  <!-- ================= PHILOSOPHY ================= -->
+  <section class="philosophy" id="philosophy" data-section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">PHILOSOPHY</span>
+        <h2>光を、磨く。</h2>
+      </div>
+      <div class="grid">
+        <div class="philosophy-body reveal">
+          <p class="proverb">玉、磨かざれば光なし。</p>
+          <p>「玉久」という名には、磨けば必ず光る、という祈りにも似た信念が込められています。玉はもとより輝きを内に秘めていながら、磨く手間を惜しめばただの石にとどまる。人も、時間も、場も同じことだと私たちは考えています。</p>
+          <!-- 要確認：薬院の地名由来の記述について、事実関係の最終確認をお願いします -->
+          <p>私たちの拠点である福岡・薬院は、奈良時代に遣唐使・吉備真備が薬草園と施薬院を築いたことに由来すると伝えられる、およそ1300年にわたり人の心と身体を整えてきた土地です。</p>
+          <p>茶道や書道で心を磨き、和のもてなしでひとときを磨き、美容で自分自身を磨く。玉久が営む三つの事業は、その根っこでひとつの哲学につながっています。ひび割れを金で継ぎ、以前よりも美しい景色に変える「金継ぎ」のように、私たちは日常の欠けや迷いさえも、光に変えていきたいと考えています。</p>
+        </div>
+        <div class="kintsugi-figure reveal" id="kintsugiFigure">
+          <svg viewBox="0 0 320 320" fill="none">
+            <defs>
+              <linearGradient id="figGoldGrad" x1="0" y1="0" x2="320" y2="320">
+                <stop offset="0%" stop-color="#e7c281"/>
+                <stop offset="100%" stop-color="#8a6428"/>
+              </linearGradient>
+            </defs>
+            <path class="vessel" d="M78 96 C78 60, 242 60, 242 96 L228 250 C226 272, 94 272, 92 250 Z"/>
+            <path class="crack c1" d="M96 108 L150 150 L138 180"/>
+            <path class="crack c2" d="M150 150 L204 118 L222 96"/>
+            <path class="crack c3" d="M138 180 L162 214 L150 250"/>
+            <path class="crack c4" d="M162 214 L204 206 L214 178"/>
+          </svg>
+          <p class="kintsugi-caption">KINTSUGI — 継ぎ目に光を宿す</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services" id="services" data-section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">THREE LIGHTS — 三つの光</span>
+        <h2>ひとつの哲学から、<br class="nw">三つの事業が生まれる。</h2>
+        <p>和の習い事、飲食店、美容。分野は異なっても、目指す先は同じ ── 磨くことで見えてくる本来の輝きです。</p>
+      </div>
+
+      <!-- 01 和の習い事事業 -->
+      <div class="service-block reveal" style="--accent:var(--indigo-soft)">
+        <div class="service-media">
+          <img src="https://images.unsplash.com/photo-1545048702-79362596cdc9?w=1000&q=80&auto=format&fit=crop"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-tea/1000/750';"
+               alt="茶道の稽古風景、抹茶を点てる様子" loading="lazy">
+          <div class="accent-corner"></div>
+        </div>
+        <div class="service-copy">
+          <span class="num-label">01 — 和の習い事事業</span>
+          <!-- 要確認：「香雲庵」はコンセプトに基づく屋号案です。既存の正式名称がある場合は差し替えてください 
+          <span class="sub-brand">香雲庵 KŌUN-AN</span> -->
+          <h3>心を整える稽古</h3>
+          <p>茶道、書道をはじめとする日本文化の教室・講座・体験会・イベントを企画し、運営し、指導します。作法を覚えることは、心を整える稽古でもあります。季節を感じ、所作を磨き、静けさの中に自分を見つめ直す時間を、はじめての方にも丁寧にお届けします。</p>
+          <p class="scope">教室運営／体験会・単発講座／文化イベントの企画運営</p>
+        </div>
+      </div>
+
+      <!-- 02 飲食店事業 -->
+      <div class="service-block reveal" style="--accent:var(--matcha-soft)">
+        <div class="service-media">
+          <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=1000&q=80&auto=format&fit=crop"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-omotenashi/1000/750';"
+               alt="着物姿でのおもてなし、抹茶を提供する様子" loading="lazy">
+          <div class="accent-corner"></div>
+        </div>
+        <div class="service-copy">
+          <span class="num-label">02 — 飲食店事業</span>
+          <!-- 要確認：「珠のま」はコンセプトに基づく屋号案です。既存の正式名称がある場合は差し替えてください 
+          <span class="sub-brand">珠のま TAMA NO MA</span> -->
+          <h3>間をもてなす</h3>
+          <p>着物での接客や抹茶の提供など、和のおもてなしを取り入れた飲食店・バー・カフェを企画し、運営し、経営します。器を選ぶ間、お茶を点てる間、会話が生まれる間 ── ひとつひとつの「間（ま）」を大切に磨き上げ、忘れがたいひとときを作ります。</p>
+          <p class="scope">和のカフェ・バー運営／着物接客／茶懐石・季節の一皿</p>
+        </div>
+      </div>
+
+      <!-- 03 美容事業 -->
+      <div class="service-block reveal" style="--accent:var(--sakura-soft)">
+        <div class="service-media">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1000&q=80&auto=format&fit=crop"
+               onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-beauty/1000/750';"
+               alt="美容サロンでのセルフケア、施術の様子" loading="lazy">
+          <div class="accent-corner"></div>
+        </div>
+        <div class="service-copy">
+          <span class="num-label">03 — 美容事業</span>
+          <!-- 要確認：「玉肌院」はコンセプトに基づく屋号案です。既存の正式名称、および施術に関する表現の最終確認をお願いします 
+          <span class="sub-brand">玉肌院 TAMAHADA-IN</span> -->
+          <h3>自分を磨く時間</h3>
+          <p>美容サロンの企画・運営・経営、そして美容・健康・セルフケアに関する施術、指導、商品の販売を行います。特別な誰かのためではなく、自分自身のための磨きの時間を。日々のセルフケアから本格的な施術まで、その人らしい輝きに寄り添います。</p>
+          <p class="scope">美容サロン運営／セルフケア指導／美容関連商品の販売</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="process" id="process" data-section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">HOW WE POLISH</span>
+        <h2>磨きの四段階</h2>
+        <p>教室でも、食の場でも、美容でも。<br>玉久が大切にする時間の流れは、いつも同じ四つの段階をたどります。</p>
+      </div>
+      <div class="stage-line">
+        <div class="stage reveal">
+          <span class="dot"></span>
+          <span class="stage-jp">出会う</span>
+          <span class="stage-en">DEAI — ENCOUNTER</span>
+          <p>はじめての茶室、はじめての一皿、はじめての鏡の前。緊張せずに向き合える場をご用意します。</p>
+        </div>
+        <div class="stage reveal">
+          <span class="dot"></span>
+          <span class="stage-jp">整える</span>
+          <span class="stage-en">TOTONOERU — PREPARE</span>
+          <p>姿勢、器、肌のコンディション。磨く前に、まず整える。丁寧な下ごしらえを何より大切にします。</p>
+        </div>
+        <div class="stage reveal">
+          <span class="dot"></span>
+          <span class="stage-jp">磨く</span>
+          <span class="stage-en">MIGAKU — REFINE</span>
+          <p>稽古を重ね、もてなしを重ね、施術を重ねる。繰り返しの中でしか生まれない輝きがあります。</p>
+        </div>
+        <div class="stage reveal">
+          <span class="dot"></span>
+          <span class="stage-jp">輝く</span>
+          <span class="stage-en">KAGAYAKU — SHINE</span>
+          <p>磨いた先に見えるのは、特別な誰かではなく、本来のあなた自身。その光を、そっと後押しします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MESSAGE ================= -->
+  <section class="message" id="message" data-section>
+    <div class="wrap">
+      <div class="section-head reveal" style="max-width:520px;">
+        <span class="kicker" style="color:var(--gold-light);">REPRESENTATIVE MESSAGE</span>
+        <!-- 要確認：以下の代表メッセージ本文は制作上の草案です。中山様ご本人の言葉での確認・修正をお願いします -->
+        <h2 style="color:var(--paper);">代表からのご挨拶</h2>
+      </div>
+      <div class="reveal" style="display:flex; gap:clamp(30px,6vw,90px); align-items:flex-start; flex-wrap:wrap;">
+        <p class="message-vertical">
+          薬院という土地で創業してから、いつも心にあるのは「磨けば光る」という、ごく単純な信念です。茶道の稽古も、お客さまをお迎えする一瞬も、肌に触れる施術も、突き詰めれば同じことをしているのだと思っています。忙しい日々の中で見失いがちな、自分自身の輝きを思い出していただく。それが玉久という会社にできる、ささやかで大切な仕事だと考えています。まだ小さな会社ですが、ひとつひとつの出会いを丁寧に磨いていきたいと思います。
+        </p>
+        <div class="message-meta">
+          <span class="role mono">代表取締役</span>
+          <span class="name">中山 由紀子</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPANY PROFILE ================= -->
+  <section class="profile" id="profile" data-section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">COMPANY PROFILE</span>
+        <h2>会社概要</h2>
+      </div>
+      <div class="profile-grid reveal">
+        <table class="profile-table">
+          <tr><th>会社名</th><td>株式会社玉久</td></tr>
+          <tr><th>代表者</th><td>代表取締役　中山 由紀子</td></tr>
+          <tr><th>所在地</th><td>〒810-0023<br>福岡県福岡市中央区薬院一丁目15番8号</td></tr>
+          <tr><th>事業内容</th>
+            <td>
+              <ol>
+                <li>和の習い事事業 ─ 茶道、書道その他の日本文化に関する教室、講座、体験会及びイベントの企画、運営並びに指導</li>
+                <li>飲食店事業 ─ 着物での接客や抹茶の提供など、和のおもてなしを取り入れた飲食店、バー及びカフェ等の企画、運営及び経営</li>
+                <li>美容事業 ─ 美容サロンの企画、運営及び経営並びに美容、健康、セルフケアに関する施術、指導及び商品の販売</li>
+              </ol>
+            </td>
+          </tr>
+          <!-- 
+          <tr><th>設立</th><td>要確認</td></tr>
+          <tr><th>資本金</th><td>要確認</td></tr>
+          -->
+        </table>
+
+        <!--
+        <div class="profile-note">
+           要確認：下記は公開前にご確認いただきたい事項の一覧です 
+          <h4>公開前のご確認事項</h4>
+          <ul>
+            <li>美容事業に関する表現は、薬機法・医師法上「医療行為」「治療効果」と誤認されないよう配慮しています。実際の施術内容に応じて再度ご確認ください。</li>
+            <li>飲食店事業で酒類を提供される場合、酒類販売業免許・食品衛生責任者資格等の取得状況をご確認ください。</li>
+            <li>各事業のサブブランド名（香雲庵／珠のま／玉肌院）はコンセプト提案です。既存の屋号がある場合は差し替えをお願いします。</li>
+            <li>設立年・資本金は情報提供がなかったため未記載です。</li>
+            <li>掲載写真はUnsplashのフリー素材です。開業前に自社撮影の写真へ差し替えることを推奨します。</li> 
+          </ul>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <span class="foot-brand">株式会社玉久</span>
+      <span class="foot-addr">〒810-0023　福岡県福岡市中央区薬院一丁目15番8号<br>TAMAHISA CO., LTD. — YAKUIN, FUKUOKA</span>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> TAMAHISA CO., LTD.</span>
+      <span>玉、磨かざれば光なし。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- footer year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- header contrast on dark/light sections ---------- */
+  var header = document.getElementById('siteHeader');
+  var darkSections = ['hero','services','message'];
+  var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
+
+  function updateHeader(){
+    var probeY = 70;
+    var current = null;
+    for (var i = 0; i < sections.length; i++){
+      var r = sections[i].getBoundingClientRect();
+      if (r.top <= probeY && r.bottom > probeY){ current = sections[i].id; break; }
+    }
+    if (current && darkSections.indexOf(current) !== -1){
+      header.classList.remove('on-light');
+    } else {
+      header.classList.add('on-light');
+    }
+  }
+
+  /* ---------- kintsugi scroll rail ---------- */
+  var railGold = document.getElementById('railGold');
+  var railLen = 2600;
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.rail-node'));
+
+  function updateRail(){
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var max = (doc.scrollHeight - window.innerHeight) || 1;
+    var pct = Math.min(Math.max(scrollTop / max, 0), 1);
+    var offset = railLen - (railLen * pct);
+    railGold.style.strokeDashoffset = offset;
+
+    nodes.forEach(function(n){
+      var idx = parseFloat(n.getAttribute('data-idx'));
+      var nodePct = idx / (nodes.length - 1);
+      if (pct >= nodePct - 0.02){ n.classList.add('lit'); }
+      else { n.classList.remove('lit'); }
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if (!ticking){
+      window.requestAnimationFrame(function(){
+        updateRail();
+        updateHeader();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  updateRail();
+  updateHeader();
+
+  /* ---------- reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal, .stage, .kintsugi-figure');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- hero canvas: kintsugi crack formation ---------- */
+  var canvas = document.getElementById('heroCanvas');
+  var ctx = canvas.getContext('2d');
+  var W, H, dpr;
+  var cracks = [];
+
+  function resizeCanvas(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth = canvas.parentElement.offsetWidth;
+    H = canvas.clientHeight = canvas.parentElement.offsetHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    buildCracks();
+  }
+
+  function buildCracks(){
+    cracks = [];
+    var count = 5;
+    for (var i=0; i<count; i++){
+      var startX = W * (0.15 + Math.random()*0.7);
+      var startY = H * (0.15 + Math.random()*0.7);
+      var pts = [{x:startX, y:startY}];
+      var segs = 4 + Math.floor(Math.random()*3);
+      var angle = Math.random() * Math.PI * 2;
+      for (var s=0; s<segs; s++){
+        angle += (Math.random()-0.5) * 1.6;
+        var len = 40 + Math.random()*70;
+        var last = pts[pts.length-1];
+        pts.push({
+          x: last.x + Math.cos(angle)*len,
+          y: last.y + Math.sin(angle)*len
+        });
+      }
+      cracks.push({ pts: pts, progress: 0, speed: 0.0022 + Math.random()*0.0018, delay: i * 60 });
+    }
+  }
+
+  var frame = 0;
+  function drawCracks(){
+    ctx.clearRect(0,0,W,H);
+
+    // subtle dark ceramic-like radial texture
+    var grad = ctx.createRadialGradient(W*0.7,H*0.4,0,W*0.7,H*0.4,Math.max(W,H)*0.8);
+    grad.addColorStop(0,'rgba(40,34,24,0.55)');
+    grad.addColorStop(1,'rgba(21,19,15,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,W,H);
+
+    cracks.forEach(function(c){
+      if (frame < c.delay) return;
+      if (c.progress < 1){ c.progress = Math.min(1, c.progress + c.speed); }
+
+      var totalPts = c.pts.length;
+      var drawUpTo = c.progress * (totalPts - 1);
+      var fullSegs = Math.floor(drawUpTo);
+
+      ctx.beginPath();
+      ctx.moveTo(c.pts[0].x, c.pts[0].y);
+      for (var i=1; i<=fullSegs; i++){
+        ctx.lineTo(c.pts[i].x, c.pts[i].y);
+      }
+      if (fullSegs < totalPts - 1){
+        var t = drawUpTo - fullSegs;
+        var a = c.pts[fullSegs], b = c.pts[fullSegs+1];
+        ctx.lineTo(a.x + (b.x-a.x)*t, a.y + (b.y-a.y)*t);
+      }
+
+      var pulse = 0.55 + Math.sin(frame*0.02 + c.delay) * 0.18;
+      ctx.strokeStyle = 'rgba(212,175,122,' + (0.55*pulse).toFixed(3) + ')';
+      ctx.lineWidth = 1.6;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.shadowColor = 'rgba(184,134,60,0.6)';
+      ctx.shadowBlur = 6;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    });
+
+    frame++;
+  }
+
+  var rafId;
+  function loop(){
+    drawCracks();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  if (reduceMotion){
+    // draw a single static frame instead of looping
+    cracks.forEach(function(c){ c.progress = 1; });
+    drawCracks();
+  } else {
+    loop();
+  }
+
+})();
+</script>
+
+</body>
+</html>
