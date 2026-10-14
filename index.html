@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>株式会社玉久｜玉、磨かざれば光なし。</title>
-<meta name="description" content="株式会社玉久 公式サイト。福岡・薬院を拠点に、和の習い事、飲食店、美容の三つの事業を通じて「磨く」ことの豊かさを届けます。">
+<title>株式会社玉久｜光を、磨く。</title>
+<meta name="description" content="株式会社玉久 公式サイト。福岡・薬院を拠点に、和の習い事、飲食、美容を通じて、日本の伝統文化とおもてなしの心を大切に、心豊かな時間と暮らしを提案します。">
 
 <!-- ============================================================
   制作メモ（納品時にご確認ください）
@@ -211,7 +211,7 @@
     display:flex;
     flex-direction:column;
     gap:28px;
-    max-width:290px;
+    max-width:460px;
     padding-bottom:6px;
   }
   .hero-side .kicker{
@@ -223,6 +223,18 @@
   .hero-side p{
     font-size:15px;
     color:rgba(243,238,227,0.82);
+  }
+  .hero-side .hero-catch{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:clamp(22px,2.6vw,32px);
+    font-weight:600;
+    line-height:1.6;
+    letter-spacing:.04em;
+    color:var(--paper);
+    margin-bottom:0;
+  }
+  @media (max-width:600px){
+    br.pc-br{display:none;}
   }
   .hero-scroll{
     position:absolute;
@@ -286,6 +298,77 @@
   /* ================= PHILOSOPHY ================= */
   .philosophy{
     background:var(--paper);
+  }
+  .philosophy{padding-top:0;}
+  .philosophy-visual{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    margin-bottom:clamp(90px,12vw,160px);
+  }
+  .philosophy-visual .philosophy-bg{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:33% 100%;
+    transform:scaleX(-1);
+  }
+  .philosophy-visual::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(243,238,227,.96) 0%, rgba(243,238,227,.88) 38%, rgba(243,238,227,.25) 68%, rgba(243,238,227,0) 100%);
+  }
+  .philosophy-visual-inner{
+    position:relative;
+    z-index:2;
+    width:100%;
+    padding-top:120px;
+    padding-bottom:120px;
+  }
+  .philosophy-visual .kicker{
+    display:block;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    color:var(--gold-deep);
+    margin-bottom:22px;
+  }
+  .philosophy-visual h2{
+    font-size:clamp(44px,7vw,88px);
+    line-height:1.3;
+    letter-spacing:.04em;
+    margin-bottom:clamp(28px,4vw,44px);
+  }
+  .philosophy-visual .visual-lead{
+    font-family:"Shippori Mincho B1", serif;
+    font-size:clamp(19px,2vw,24px);
+    color:var(--ink);
+    margin-bottom:14px;
+  }
+  .philosophy-visual p{
+    font-size:15.5px;
+    color:var(--ink-text);
+    max-width:34em;
+  }
+  @media (max-width:760px){
+    .philosophy-visual{flex-direction:column; align-items:stretch;}
+    .philosophy-visual::after{display:none;}
+    .philosophy-visual .philosophy-bg{
+      order:2;
+      position:relative; inset:auto;
+      flex:1 1 auto;
+      min-height:300px;
+      height:auto;
+      -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 30%);
+              mask-image:linear-gradient(180deg, transparent 0, #000 30%);
+    }
+    .philosophy-visual-inner{padding-top:110px; padding-bottom:0;}
+  }
+  .philosophy .section-head .kicker{
+    border-left:3px solid var(--gold);
+    padding:6px 0 6px 22px;
   }
   .philosophy .grid{
     display:grid;
@@ -402,6 +485,9 @@
     margin-bottom:18px;
     line-height:1.6;
   }
+  @media (max-width:480px){
+    .service-copy h3{font-size:18px;}
+  }
   .service-copy p{
     color:rgba(243,238,227,.78);
     font-size:15px;
@@ -479,7 +565,8 @@
   }
   .message .wrap{
     display:flex;
-    gap:clamp(30px,6vw,90px);
+    column-gap:clamp(30px,6vw,90px);
+    row-gap:0;
     align-items:flex-start;
     flex-wrap:wrap;
   }
@@ -518,6 +605,20 @@
     max-width:26ch;
   }
 
+  .message-vertical p{margin-bottom:1.4em;}
+  .message-quote{
+    margin:0 0 1.4em;
+    padding-left:24px;
+    border-left:2px solid var(--gold-light);
+  }
+  .message-quote .quote-title{
+    display:block;
+    font-size:1.5em;
+    letter-spacing:.12em;
+    color:var(--gold-light);
+    margin-bottom:.3em;
+  }
+
   @media (max-width:760px){
     .message-vertical{line-height:2;}
   }
@@ -526,7 +627,7 @@
   .profile{background:var(--paper);}
   .profile-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:clamp(30px,5vw,80px);
   }
   .profile-table{
@@ -547,7 +648,7 @@
     font-size:12px;
     letter-spacing:.08em;
     color:var(--gold-deep);
-    width:34%;
+    width:22%;
     white-space:nowrap;
   }
   .profile-table td{color:var(--ink-text);}
@@ -627,9 +728,8 @@
   ・美容事業：施術・効果に関する表現は薬機法/医師法に抵触しない範囲に留めています（医療的な「治療」「完治」等の表現は使用していません）。実際の施術内容に応じて表現の再確認が必要です。
   ・飲食店事業：酒類を提供される場合、酒類販売業免許・食品衛生責任者の資格等が必要です（本サイトでは具体的な許可番号等は記載していません）。
   ・和の習い事事業：講師資格・流派等を明記する場合は、正式名称のご確認をお願いします。
-  ・各事業のサブブランド名（香雲庵／珠のま／玉肌院）は、コンセプトに基づくご提案です。既に正式名称がある場合は差し替えてください。
-  ・薬院の地名由来（施薬院・薬草園の記述）は伝承としてご紹介しています。事実関係の最終確認をお願いします。
-  ・代表者メッセージは草案です。中山様ご本人の言葉での確定をお願いします。
+  ・飲食店事業「Salon BAR 玉久」、美容事業「T.H Beauté（たまひさボーテ）」は修正案（2026-10）に基づく正式名称です。
+  ・代表者メッセージは修正案（2026-10）の文面を反映しています。
   ・会社概要の設立年・資本金は情報提供がなかったため「要確認」としています。
   ・各確認事項は本文中に表示せず、該当箇所付近のHTMLコメントにのみ記載しています。
 ============================================================= -->
@@ -668,7 +768,9 @@
     <div class="hero-inner">
       <div class="hero-side">
         <span class="kicker">TAMAHISA CO., LTD.</span>
-        <p>和の習い事、飲食店、美容。三つの事業を通じて、日常に光を灯す。福岡・薬院からはじまる、磨くことの物語。</p>
+        <p class="hero-catch">文化を愉しみ、<br class="nw">ご縁を紡ぐ。</p>
+        <p>和の習い事、飲食、美容。</p>
+        <p>日本の伝統文化とおもてなしの心を大切に、<br class="pc-br">人と人との出会いを育み、<br class="pc-br">心豊かな時間と暮らしを提案します。</p>
       </div>
       <h1 class="hero-vertical">
         株式会社玉久
@@ -679,36 +781,46 @@
 
   <!-- ================= PHILOSOPHY ================= -->
   <section class="philosophy" id="philosophy" data-section>
-    <div class="wrap">
-      <div class="section-head reveal">
+    <div class="philosophy-visual">
+      <img class="philosophy-bg" src="https://images.unsplash.com/photo-1757507423608-ae47cddef75f?w=2000&q=80&auto=format&fit=crop"
+           alt="茶室に置かれた茶釜と茶道具" loading="lazy">
+      <div class="philosophy-visual-inner wrap reveal">
         <span class="kicker">PHILOSOPHY</span>
         <h2>光を、磨く。</h2>
+        <p class="visual-lead">和の習い事、飲食、美容。</p>
+        <p>日本の伝統文化とおもてなしの心を大切に、<br>人と人との出会いを育み、<br>心豊かな時間と暮らしを提案します。</p>
       </div>
-      <div class="grid">
-        <div class="philosophy-body reveal">
-          <p class="proverb">玉、磨かざれば光なし。</p>
-          <p>「玉久」という名には、磨けば必ず光る、という祈りにも似た信念が込められています。玉はもとより輝きを内に秘めていながら、磨く手間を惜しめばただの石にとどまる。人も、時間も、場も同じことだと私たちは考えています。</p>
-          <!-- 要確認：薬院の地名由来の記述について、事実関係の最終確認をお願いします -->
-          <p>私たちの拠点である福岡・薬院は、奈良時代に遣唐使・吉備真備が薬草園と施薬院を築いたことに由来すると伝えられる、およそ1300年にわたり人の心と身体を整えてきた土地です。</p>
-          <p>茶道や書道で心を磨き、和のもてなしでひとときを磨き、美容で自分自身を磨く。玉久が営む三つの事業は、その根っこでひとつの哲学につながっています。ひび割れを金で継ぎ、以前よりも美しい景色に変える「金継ぎ」のように、私たちは日常の欠けや迷いさえも、光に変えていきたいと考えています。</p>
-        </div>
-        <div class="kintsugi-figure reveal" id="kintsugiFigure">
-          <svg viewBox="0 0 320 320" fill="none">
-            <defs>
-              <linearGradient id="figGoldGrad" x1="0" y1="0" x2="320" y2="320">
-                <stop offset="0%" stop-color="#e7c281"/>
-                <stop offset="100%" stop-color="#8a6428"/>
-              </linearGradient>
-            </defs>
-            <path class="vessel" d="M78 96 C78 60, 242 60, 242 96 L228 250 C226 272, 94 272, 92 250 Z"/>
-            <path class="crack c1" d="M96 108 L150 150 L138 180"/>
-            <path class="crack c2" d="M150 150 L204 118 L222 96"/>
-            <path class="crack c3" d="M138 180 L162 214 L150 250"/>
-            <path class="crack c4" d="M162 214 L204 206 L214 178"/>
-          </svg>
-          <p class="kintsugi-caption">KINTSUGI — 継ぎ目に光を宿す</p>
-        </div>
+    </div>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">PHILOSOPHY　|　企業理念</span>
+        <h2>受け継ぐ、<br>日本の美とおもてなしの心。</h2>
       </div>
+      <div class="philosophy-body reveal">
+        <p>「玉久」という名は、創業者の母の名前に由来します。</p>
+        <p>華道や書道など、和の文化に囲まれた環境で育まれた美意識と、訪れる人を温かくもてなす心。</p>
+        <p>そして、美と健康を大切にする暮らしの知恵。</p>
+        <p>古き良きものを大切にしながら、新しい価値を創造する。</p>
+        <p>日本の美意識を受け継ぎ、人とのご縁を育み、心身ともに豊かな暮らしを提案してまいります。</p>
+      </div>
+      <!-- 修正案（2026-10）で金継ぎの図は非表示に
+      <div class="kintsugi-figure reveal" id="kintsugiFigure">
+        <svg viewBox="0 0 320 320" fill="none">
+          <defs>
+            <linearGradient id="figGoldGrad" x1="0" y1="0" x2="320" y2="320">
+              <stop offset="0%" stop-color="#e7c281"/>
+              <stop offset="100%" stop-color="#8a6428"/>
+            </linearGradient>
+          </defs>
+          <path class="vessel" d="M78 96 C78 60, 242 60, 242 96 L228 250 C226 272, 94 272, 92 250 Z"/>
+          <path class="crack c1" d="M96 108 L150 150 L138 180"/>
+          <path class="crack c2" d="M150 150 L204 118 L222 96"/>
+          <path class="crack c3" d="M138 180 L162 214 L150 250"/>
+          <path class="crack c4" d="M162 214 L204 206 L214 178"/>
+        </svg>
+        <p class="kintsugi-caption">KINTSUGI — 継ぎ目に光を宿す</p>
+      </div>
+      -->
     </div>
   </section>
 
@@ -724,9 +836,9 @@
       <!-- 01 和の習い事事業 -->
       <div class="service-block reveal" style="--accent:var(--indigo-soft)">
         <div class="service-media">
-          <img src="https://images.unsplash.com/photo-1545048702-79362596cdc9?w=1000&q=80&auto=format&fit=crop"
+          <img src="https://images.unsplash.com/flagged/photo-1565080636132-56952ee2861c?w=1000&q=80&auto=format&fit=crop"
                onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-tea/1000/750';"
-               alt="茶道の稽古風景、抹茶を点てる様子" loading="lazy">
+               alt="着物姿で茶を点てる茶道の稽古風景" loading="lazy">
           <div class="accent-corner"></div>
         </div>
         <div class="service-copy">
@@ -742,36 +854,37 @@
       <!-- 02 飲食店事業 -->
       <div class="service-block reveal" style="--accent:var(--matcha-soft)">
         <div class="service-media">
-          <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=1000&q=80&auto=format&fit=crop"
+          <img src="https://images.unsplash.com/photo-1784126689734-703773595e52?w=1000&q=80&auto=format&fit=crop"
                onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-omotenashi/1000/750';"
-               alt="着物姿でのおもてなし、抹茶を提供する様子" loading="lazy">
+               alt="温かな照明に包まれたバーカウンター" loading="lazy">
           <div class="accent-corner"></div>
         </div>
         <div class="service-copy">
           <span class="num-label">02 — 飲食店事業</span>
-          <!-- 要確認：「珠のま」はコンセプトに基づく屋号案です。既存の正式名称がある場合は差し替えてください 
-          <span class="sub-brand">珠のま TAMA NO MA</span> -->
-          <h3>間をもてなす</h3>
-          <p>着物での接客や抹茶の提供など、和のおもてなしを取り入れた飲食店・バー・カフェを企画し、運営し、経営します。器を選ぶ間、お茶を点てる間、会話が生まれる間 ── ひとつひとつの「間（ま）」を大切に磨き上げ、忘れがたいひとときを作ります。</p>
-          <p class="scope">和のカフェ・バー運営／着物接客／茶懐石・季節の一皿</p>
+          <h3>人が集い、<br>ご縁が深まる。</h3>
+          <p>Salon BAR 玉久は、和のおもてなしの心を大切にした、大人のためのくつろぎの空間です。</p>
+          <p>お酒を片手に会話を愉しみ、人と人とのご縁が自然に広がる場所。</p>
+          <p>日常を少し離れ、心豊かなひとときをお過ごしいただけます。</p>
+          <p>また、ワインや音楽、文化を愉しむイベントを通じて、新たな出会いと交流の場を創造します。</p>
+          <p class="scope">Salon BAR 玉久／イベント企画・運営／文化交流</p>
         </div>
       </div>
 
       <!-- 03 美容事業 -->
       <div class="service-block reveal" style="--accent:var(--sakura-soft)">
         <div class="service-media">
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1000&q=80&auto=format&fit=crop"
+          <img src="https://images.unsplash.com/photo-1474557157379-8aa74a6ef541?w=1000&q=80&auto=format&fit=crop"
                onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-beauty/1000/750';"
-               alt="美容サロンでのセルフケア、施術の様子" loading="lazy">
+               alt="水面に浮かぶ淡いピンクの蓮の花" loading="lazy">
           <div class="accent-corner"></div>
         </div>
         <div class="service-copy">
           <span class="num-label">03 — 美容事業</span>
-          <!-- 要確認：「玉肌院」はコンセプトに基づく屋号案です。既存の正式名称、および施術に関する表現の最終確認をお願いします 
-          <span class="sub-brand">玉肌院 TAMAHADA-IN</span> -->
-          <h3>自分を磨く時間</h3>
-          <p>美容サロンの企画・運営・経営、そして美容・健康・セルフケアに関する施術、指導、商品の販売を行います。特別な誰かのためではなく、自分自身のための磨きの時間を。日々のセルフケアから本格的な施術まで、その人らしい輝きに寄り添います。</p>
-          <p class="scope">美容サロン運営／セルフケア指導／美容関連商品の販売</p>
+          <!-- 保留：T.H Beauté のロゴは元データをいただいてから追加します -->
+          <h3>美しさが満ちる、<br>整える時間。</h3>
+          <p>T.H Beauté（たまひさボーテ）は、年齢や性別にとらわれず、すべての方が本来の美しさと健やかさを育める Beauty &amp; Wellness サロンです。耳つぼリフレクソロジーをはじめ、スキンケアやボディケア、セルフケアの指導、関連商品の販売まで、内側と外側の両面から美と健康をサポートします。</p>
+          <p>日々の暮らしの中で、自分自身をいたわり、整える時間を提供し、その人らしい輝きに寄り添います。</p>
+          <p class="scope">耳つぼリフレクソロジー<br>スキンケア・ボディケア<br>セルフケア指導<br>美容関連商品の販売</p>
         </div>
       </div>
     </div>
@@ -782,33 +895,33 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="kicker">HOW WE POLISH</span>
-        <h2>磨きの四段階</h2>
-        <p>教室でも、食の場でも、美容でも。<br>玉久が大切にする時間の流れは、いつも同じ四つの段階をたどります。</p>
+        <h2>玉久が大切にしていること</h2>
+        <p>学びの場でも、社交の場でも、自分磨きの場でも。<br>玉久が大切にする時間の流れは、いつも同じ四つの段階をたどります。</p>
       </div>
       <div class="stage-line">
         <div class="stage reveal">
           <span class="dot"></span>
-          <span class="stage-jp">出会う</span>
-          <span class="stage-en">DEAI — ENCOUNTER</span>
-          <p>はじめての茶室、はじめての一皿、はじめての鏡の前。緊張せずに向き合える場をご用意します。</p>
+          <span class="stage-jp">出会い</span>
+          <span class="stage-en">ENCOUNTER</span>
+          <p>初めての茶室、初めてのワイン、初めての経験。心がわくわくする場を提供します。</p>
         </div>
         <div class="stage reveal">
           <span class="dot"></span>
           <span class="stage-jp">整える</span>
-          <span class="stage-en">TOTONOERU — PREPARE</span>
-          <p>姿勢、器、肌のコンディション。磨く前に、まず整える。丁寧な下ごしらえを何より大切にします。</p>
+          <span class="stage-en">PREPARE</span>
+          <p>心地の良い音、香り、しつらえで、心と体が整う場を大切にします。</p>
         </div>
         <div class="stage reveal">
           <span class="dot"></span>
           <span class="stage-jp">磨く</span>
-          <span class="stage-en">MIGAKU — REFINE</span>
-          <p>稽古を重ね、もてなしを重ね、施術を重ねる。繰り返しの中でしか生まれない輝きがあります。</p>
+          <span class="stage-en">REFINE</span>
+          <p>学びや施術、食の力を通じて内側から美と健康を磨いていきます。</p>
         </div>
         <div class="stage reveal">
           <span class="dot"></span>
-          <span class="stage-jp">輝く</span>
-          <span class="stage-en">KAGAYAKU — SHINE</span>
-          <p>磨いた先に見えるのは、特別な誰かではなく、本来のあなた自身。その光を、そっと後押しします。</p>
+          <span class="stage-jp">広がる</span>
+          <span class="stage-en">ENRICH</span>
+          <p>整え、磨いた先にある豊かさを、日々の暮らしや大切な人へと広げていきます。</p>
         </div>
       </div>
     </div>
@@ -817,15 +930,21 @@
   <!-- ================= MESSAGE ================= -->
   <section class="message" id="message" data-section>
     <div class="wrap">
-      <div class="section-head reveal" style="max-width:520px;">
+      <div class="section-head reveal" style="max-width:520px; margin-bottom:32px;">
         <span class="kicker" style="color:var(--gold-light);">REPRESENTATIVE MESSAGE</span>
-        <!-- 要確認：以下の代表メッセージ本文は制作上の草案です。中山様ご本人の言葉での確認・修正をお願いします -->
         <h2 style="color:var(--paper);">代表からのご挨拶</h2>
       </div>
-      <div class="reveal" style="display:flex; gap:clamp(30px,6vw,90px); align-items:flex-start; flex-wrap:wrap;">
-        <p class="message-vertical">
-          薬院という土地で創業してから、いつも心にあるのは「磨けば光る」という、ごく単純な信念です。茶道の稽古も、お客さまをお迎えする一瞬も、肌に触れる施術も、突き詰めれば同じことをしているのだと思っています。忙しい日々の中で見失いがちな、自分自身の輝きを思い出していただく。それが玉久という会社にできる、ささやかで大切な仕事だと考えています。まだ小さな会社ですが、ひとつひとつの出会いを丁寧に磨いていきたいと思います。
-        </p>
+      <div class="reveal" style="display:flex; flex-direction:column; gap:clamp(30px,4vw,48px); align-items:flex-start;">
+        <div class="message-vertical">
+          <p>薬院という土地で創業してから、いつも心にあるのは「磨けば光る」という、ごく単純な信念です。</p>
+          <p>茶道の稽古も、お客さまをお迎えする一瞬も、肌に触れる施術も、突き詰めれば同じことだと思っています。</p>
+          <p>忙しい日々の中で見失いがちな、自分自身の輝きを思い出していただく。それが玉久という会社にできる、ささやかで大切な仕事だと考えています。</p>
+          <blockquote class="message-quote">
+            <span class="quote-title">日々是好日</span>
+            淡々と今ここにあることを続けていくことで、<br class="pc-br">気がつけば磨かれていくもの、こと。
+          </blockquote>
+          <p>まだ小さな会社ですが、<br>ひとつひとつの出会いを丁寧に磨きながら、<br>これからも地域の皆さまと共に、<br>美しさと健やかさのある豊かな日々を<br>育んでいきたいと思います。</p>
+        </div>
         <div class="message-meta">
           <span class="role mono">代表取締役</span>
           <span class="name">中山 由紀子</span>
@@ -888,7 +1007,7 @@
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> TAMAHISA CO., LTD.</span>
-      <span>玉、磨かざれば光なし。</span>
+      <span>光を、磨く。</span>
     </div>
   </div>
 </footer>
@@ -975,6 +1094,7 @@
 
   /* ---------- hero canvas: kintsugi crack formation ---------- */
   var canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var W, H, dpr;
   var cracks = [];
