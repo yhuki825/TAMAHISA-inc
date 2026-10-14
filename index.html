@@ -445,7 +445,9 @@
     border-top:1px solid var(--line-on-ink);
   }
   .service-block:last-child{padding-bottom:0;}
-  .service-block:nth-child(even) .service-media{order:2;}
+  .service-block:nth-child(even) .service-media,
+  .service-block:nth-child(even) .service-aside{order:2;}
+  .service-block:nth-child(even) .service-aside .service-media{order:0;}
   .service-media{
     position:relative;
     border-radius:2px;
@@ -462,6 +464,12 @@
     width:46px; height:46px;
     border-left:2px solid var(--accent, var(--gold));
     border-top:2px solid var(--accent, var(--gold));
+  }
+  .service-aside{display:flex; flex-direction:column; align-items:center; gap:clamp(24px,4vw,40px);}
+  .service-aside .service-media{width:100%;}
+  .service-aside .brand-logo{
+    width:clamp(120px,22vw,220px);
+    height:auto;
   }
   .service-copy .num-label{
     font-family:"IBM Plex Mono", monospace;
@@ -872,15 +880,17 @@
 
       <!-- 03 美容事業 -->
       <div class="service-block reveal" style="--accent:var(--sakura-soft)">
-        <div class="service-media">
-          <img src="https://images.unsplash.com/photo-1474557157379-8aa74a6ef541?w=1000&q=80&auto=format&fit=crop"
-               onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-beauty/1000/750';"
-               alt="水面に浮かぶ淡いピンクの蓮の花" loading="lazy">
-          <div class="accent-corner"></div>
+        <div class="service-aside">
+          <div class="service-media">
+            <img src="https://images.unsplash.com/photo-1474557157379-8aa74a6ef541?w=1000&q=80&auto=format&fit=crop"
+                 onerror="this.onerror=null;this.src='https://picsum.photos/seed/tamahisa-beauty/1000/750';"
+                 alt="水面に浮かぶ淡いピンクの蓮の花" loading="lazy">
+            <div class="accent-corner"></div>
+          </div>
+          <img class="brand-logo" src="logo-th-beaute-white.png" alt="T.H Beauté ロゴ" width="640" height="626" loading="lazy">
         </div>
         <div class="service-copy">
           <span class="num-label">03 — 美容事業</span>
-          <!-- 保留：T.H Beauté のロゴは元データをいただいてから追加します -->
           <h3>美しさが満ちる、<br>整える時間。</h3>
           <p>T.H Beauté（たまひさボーテ）は、年齢や性別にとらわれず、すべての方が本来の美しさと健やかさを育める Beauty &amp; Wellness サロンです。耳つぼリフレクソロジーをはじめ、スキンケアやボディケア、セルフケアの指導、関連商品の販売まで、内側と外側の両面から美と健康をサポートします。</p>
           <p>日々の暮らしの中で、自分自身をいたわり、整える時間を提供し、その人らしい輝きに寄り添います。</p>
